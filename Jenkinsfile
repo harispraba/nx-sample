@@ -1,11 +1,9 @@
-def dockerImage = ''
 def projects = ["node-api","go-api"] 
 
 pipeline {
     environment {
         artifactRegistryAuthURL = "https://asia-southeast2-docker.pkg.dev"
-        registry_url = 'asia-southeast2-docker.pkg.dev/rect-devops-training/rectgistry/'
-        app_name = 'sample-backend'
+        registry_url = 'asia-southeast2-docker.pkg.dev/GCP_PROJECT/AR_REPO_NAME/'
         KUBECONFIG = credentials('kubeconfig-file')
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gke-service-account')
     }
@@ -55,7 +53,7 @@ pipeline {
         }
         stage('Push to Artifact Registry') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'artifactRegistryAuth', passwordVariable: 'artifactRegistryKey']) {
+                withCredentials([usernamePassword(credentialsId: 'artifactRegistryAuth', passwordVariable: 'artifactRegistryKey')]) {
                     sh "docker login $artifactRegistryAuthURL -u _json_key -p ${env.artifactRegistryKey}"
                     sh "docker push shanem/spring-petclinic:latest"
                     script{
