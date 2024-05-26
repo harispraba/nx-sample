@@ -22,6 +22,9 @@
     },
     "lint": {
       "executor": "@nx-go/nx-go:lint"
+    },
+    "docker-build": {
+      "command": "docker build -f apps/go-api/Dockerfile . -t go-api"
     }
   }
 }

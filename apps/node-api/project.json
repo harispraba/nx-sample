@@ -19,6 +19,10 @@
           "buildTarget": "node-api:build:production"
         }
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/node-api/Dockerfile . -t node-api"
     }
   }
 }
